@@ -9,7 +9,7 @@ namespace CompAndDel
     public class Picture : IPicture
     {
         private Color[,] matrizColores;
-       
+
         /// <summary>
         /// Constructor de imagen
         /// </summary>
@@ -23,16 +23,16 @@ namespace CompAndDel
         /// <summary>
         /// Devuelve el ancho en pixels de la imagen
         /// </summary>
-        public Int32 Width 
-        { 
-            get {return this.matrizColores.GetLength(0); }
+        public Int32 Width
+        {
+            get { return this.matrizColores.GetLength(0); }
         }
         /// <summary>
         /// Devuelve la altura en pixels de la imagen
         /// </summary>
-        public Int32 Height 
+        public Int32 Height
         {
-            get { return this.matrizColores.GetLength(1); } 
+            get { return this.matrizColores.GetLength(1); }
         }
         /// <summary>
         /// Devuelve el color que compone la imagen en un pixel en particular en coordenadas cartesianas
@@ -63,7 +63,7 @@ namespace CompAndDel
         {
             Color[,] nuevaMatriz = new Color[width, height];
             nuevaMatriz.Initialize();
-            
+
             int minX, minY;
             minX = Math.Min(width, this.Width);
             minY = Math.Min(height, this.Height);
@@ -95,7 +95,7 @@ namespace CompAndDel
             {
                 for (int y = 0; y < pictureClone.Height; y++)
                 {
-                    pictureClone.SetColor(x, y, this.matrizColores[x,y]);
+                    pictureClone.SetColor(x, y, this.matrizColores[x, y]);
                 }
             }
             return pictureClone;
