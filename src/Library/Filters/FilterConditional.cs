@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using CompAndDel;
+using System.Diagnostics;
+using CognitiveCoreUCU;
 using System.Drawing;
-using System.Diagnostics; 
-using TwitterUCU;
+
 
 namespace CompAndDel.Filters
 {
@@ -17,24 +15,19 @@ namespace CompAndDel.Filters
         /// <returns>Imagen con el filtro aplicado</returns>
         public IPicture Filter(IPicture image)
         {
-            Debug.Assert(image != null);
-            IPicture invento = image.Clone();
-            PictureProvider pic = new PictureProvider();
-            pic.SavePicture(invento, $@"./../../images/bill{FilterSave.Instance.Count}.jpg");
-
-            if (CognitiveApi(pic))
+            var newImage = image.Clone();
+            var recognition = Cognitive.FaceRecognition($@"./../../images/bill{FilterSave.Instance.Count}.jpg");
+            if (recognition)
             {
-                
-                Console.WriteLine("ESTO ES UN FILTRO", $@"./../../images/bill{FilterSave.Instance.Count}.jpg");
-                
-
+                var grey = new FilterGreyscale();
+                newImage = grey.Filter(newImage);
             }
             else
             {
-                pic.SavePicture(invento, $@"./../../images/bill{FilterSave.Instance.Count}.jpg");
-                //Console.WriteLine(invento.PublishToTwitter("ESTO ES UN FILTRO", $@"./../../images/bill{FilterSave.Instance.Count}.jpg"));
+                var blur = new FilterBlurConvolution();
+                newImage = blur.Filter(newImage);
             }
-            return invento;
+            return newImage;
         }
     }
 }
