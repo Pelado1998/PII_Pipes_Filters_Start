@@ -11,19 +11,22 @@ namespace CompAndDel.Pipes
     {
         IPipe next2Pipe;
         IPipe nextPipe;
-        
+
+        IFilter filter;
+
         /// <summary>
         /// La cañería recibe una imagen, la clona y envìa la original por una cañeria y la clonada por otra.
         /// </summary>
         /// <param name="tipoFiltro">Tipo de filtro que se debe aplicar sobre la imagen. Se crea un nuevo filtro con los parametros por defecto</param>
         /// <param name="nextPipe">Siguiente cañeria con filtro</param>
         /// <param name="next2Pipe">Siguiente cañeria sin filtro</param>
-        public PipeFork(IPipe nextPipe, IPipe next2Pipe) 
+        public PipeFork(IFilter filter, IPipe nextPipe, IPipe next2Pipe)
         {
+            this.filter = filter;
             this.next2Pipe = next2Pipe;
-            this.nextPipe = nextPipe;           
+            this.nextPipe = nextPipe;
         }
-        
+
         /// <summary>
         /// La cañería recibe una imagen, construye un duplicado de la misma, 
         /// y envía la original por una cañería y el duplicado por otra.
